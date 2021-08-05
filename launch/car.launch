@@ -1,0 +1,28 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+
+  <arg name="car_name" default="car" />
+ 
+  <arg name="racecar_version" default="racecar-uw-nano" />
+
+  <group ns="$(arg car_name)">
+
+  <group ns="vesc">
+    <include file="$(find vesc_main)/launch/vesc.launch">
+        <arg name="racecar_version" value="$(arg racecar_version)" />
+        <arg name="car_name" default="/$(arg car_name)" />
+    </include>
+  </group>
+
+  <group ns="mux">
+    <include file="$(find ackermann_cmd_mux)/launch/mux.launch" />
+  </group>
+
+  <node pkg="mushr_ackermann_drive" type="car_cmd_node.py" name="drive" output="screen">
+        <param name="car_name" value="$(arg car_name)" />
+  </node>
+
+  </group> 
+
+</launch>
