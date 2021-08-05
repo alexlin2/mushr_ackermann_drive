@@ -2,9 +2,13 @@
 import rospy
 from std_msgs.msg import Float32
 
+# control topics
 car_name = "car"
 control_steering = rospy.Publisher("/"+ car_name+ "/" + "drive_me_now"+ "/steering",Float32,queue_size=1)
 control_speed = rospy.Publisher("/"+ car_name+ "/" + "drive_me_now"+ "/speed",Float32,queue_size=1)
+
+# get gps data
+
 
 rospy.init_node("test")
 while not rospy.is_shutdown():
